@@ -21,8 +21,12 @@ def add_new_todo():
 
 @app.route('/todos/<int:position>', methods=['DELETE'])
 def delete_todo(position):
-    print("This is the position to delete: ",position)
-    return 'something'
+    print("This is the position to delete: ", position)
+    if 0 <= position < len(todos):
+        del todos[position]
+        return jsonify(todos)
+    else:
+        return jsonify({"error": "Invalid position"}), 404
 
 # These two lines should always be at the end of your app.py file.
 if __name__ == '__main__':
